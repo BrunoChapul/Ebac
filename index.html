@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Lista de Tarefas com jQuery</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 30px;
+        background-color: #f0f2f5;
+      }
+
+      h1 {
+        color: #333;
+      }
+
+      form {
+        margin-bottom: 20px;
+      }
+
+      input[type="text"] {
+        padding: 10px;
+        font-size: 16px;
+        width: 250px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+      }
+
+      button {
+        padding: 10px 15px;
+        font-size: 16px;
+        border: none;
+        background-color: #2980b9;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-left: 8px;
+      }
+
+      button:hover {
+        background-color: #1c5980;
+      }
+
+      ul {
+        list-style-type: disc;
+        padding-left: 20px;
+      }
+
+      li {
+        cursor: pointer;
+        margin-bottom: 8px;
+        font-size: 18px;
+        user-select: none;
+      }
+
+      .completed {
+        text-decoration: line-through;
+        color: #888;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Lista de Tarefas</h1>
+
+    <form id="taskForm">
+      <input
+        type="text"
+        id="taskInput"
+        placeholder="Digite o nome da tarefa"
+        required
+      />
+      <button type="submit">Cadastrar</button>
+    </form>
+
+    <ul id="taskList"></ul>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+      $(document).ready(function () {
+        $("#taskForm").submit(function (event) {
+          event.preventDefault();
+
+          const taskName = $("#taskInput").val().trim();
+
+          if (taskName) {
+            const newTask = $("<li></li>").text(taskName);
+
+            $("#taskList").append(newTask);
+
+            $("#taskInput").val("");
+          }
+        });
+
+        $("#taskList").on("click", "li", function () {
+          $(this).toggleClass("completed");
+        });
+      });
+    </script>
+  </body>
+</html>
